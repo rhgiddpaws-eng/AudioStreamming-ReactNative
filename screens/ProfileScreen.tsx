@@ -7,13 +7,35 @@ import {
   ScrollView,
   Image,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useAuthStore } from '../store/authStore';
 
 export default function ProfileScreen() {
+  const navigation = useNavigation();
   const { user, logout } = useAuthStore();
 
   const handleLogout = async () => {
     await logout();
+  };
+
+  const handleMenuPress = (id: string) => {
+    switch (id) {
+      case '1':
+        navigation.navigate('Subscription');
+        break;
+      case '2':
+        // Purchases 화면 (구현 예정)
+        break;
+      case '3':
+        // Downloads 화면 (구현 예정)
+        break;
+      case '4':
+        // Settings 화면 (구현 예정)
+        break;
+      case '5':
+        // Help & Support 화면 (구현 예정)
+        break;
+    }
   };
 
   const menuItems = [
@@ -38,7 +60,11 @@ export default function ProfileScreen() {
 
       <View style={styles.section}>
         {menuItems.map((item) => (
-          <TouchableOpacity key={item.id} style={styles.menuItem}>
+          <TouchableOpacity
+            key={item.id}
+            style={styles.menuItem}
+            onPress={() => handleMenuPress(item.id)}
+          >
             <Text style={styles.menuIcon}>{item.icon}</Text>
             <Text style={styles.menuTitle}>{item.title}</Text>
             <Text style={styles.menuArrow}>›</Text>

@@ -14,6 +14,8 @@ import SearchScreen from './screens/SearchScreen';
 import LibraryScreen from './screens/LibraryScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import PlayerScreen from './screens/PlayerScreen';
+import PaymentScreen from './screens/PaymentScreen';
+import SubscriptionScreen from './screens/SubscriptionScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -93,6 +95,22 @@ export default function App() {
                   <Stack.Screen
                     name="Player"
                     component={PlayerScreen}
+                    options={{
+                      presentation: 'modal',
+                      animationEnabled: true,
+                    }}
+                  />
+                  <Stack.Screen
+                    name="Payment"
+                    component={PaymentScreen}
+                    options={{
+                      presentation: 'modal',
+                      animationEnabled: true,
+                    }}
+                  />
+                  <Stack.Screen
+                    name="Subscription"
+                    component={SubscriptionScreen}
                     options={{
                       presentation: 'modal',
                       animationEnabled: true,

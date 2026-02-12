@@ -8,8 +8,11 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+
   const trendingTracks = [
     {
       id: '1',
@@ -38,6 +41,18 @@ export default function HomeScreen() {
         <Text style={styles.subGreeting}>Discover new music</Text>
       </View>
 
+      {/* 구독 배너 */}
+      <TouchableOpacity
+        style={styles.subscriptionBanner}
+        onPress={() => navigation.navigate('Subscription')}
+      >
+        <View style={styles.bannerContent}>
+          <Text style={styles.bannerTitle}>Premium으로 업그레이드</Text>
+          <Text style={styles.bannerSubtitle}>광고 없이 무제한 스트리밍</Text>
+        </View>
+        <Text style={styles.bannerArrow}>›</Text>
+      </TouchableOpacity>
+
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Trending Now</Text>
         <FlatList
@@ -57,6 +72,9 @@ export default function HomeScreen() {
                   {item.artist}
                 </Text>
               </View>
+              <TouchableOpacity style={styles.playButton}>
+                <Text style={styles.playButtonText}>▶</Text>
+              </TouchableOpacity>
             </TouchableOpacity>
           )}
           scrollEnabled={false}
@@ -85,6 +103,35 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#888',
   },
+  subscriptionBanner: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    marginBottom: 24,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    backgroundColor: '#1DB954',
+    borderRadius: 12,
+  },
+  bannerContent: {
+    flex: 1,
+  },
+  bannerTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#000',
+    marginBottom: 4,
+  },
+  bannerSubtitle: {
+    fontSize: 12,
+    color: '#000',
+    opacity: 0.8,
+  },
+  bannerArrow: {
+    fontSize: 24,
+    color: '#000',
+  },
   section: {
     paddingHorizontal: 20,
     marginBottom: 30,
@@ -101,6 +148,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 12,
     overflow: 'hidden',
+    alignItems: 'center',
   },
   trackImage: {
     width: 60,
@@ -120,5 +168,13 @@ const styles = StyleSheet.create({
   trackArtist: {
     fontSize: 12,
     color: '#888',
+  },
+  playButton: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  playButtonText: {
+    fontSize: 16,
+    color: '#1DB954',
   },
 });
